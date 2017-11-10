@@ -90,14 +90,6 @@ describe('SyntheticKeyboardEvent', () => {
   });
 
   describe('EventInterface', () => {
-    it('normalizes properties from the Event interface', () => {
-      var target = document.createElement('div');
-      var syntheticEvent = createEvent({srcElement: target});
-
-      expect(syntheticEvent.target).toBe(target);
-      expect(syntheticEvent.type).toBe(undefined);
-    });
-
     it('is able to `preventDefault` and `stopPropagation`', () => {
       var nativeEvent = {};
       var syntheticEvent = createEvent(nativeEvent);

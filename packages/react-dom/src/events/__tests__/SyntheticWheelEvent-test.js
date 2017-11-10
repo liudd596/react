@@ -24,14 +24,6 @@ describe('SyntheticWheelEvent', () => {
     };
   });
 
-  it('should normalize properties from the Event interface', () => {
-    var target = document.createElement('div');
-    var syntheticEvent = createEvent({srcElement: target});
-
-    expect(syntheticEvent.target).toBe(target);
-    expect(syntheticEvent.type).toBe(undefined);
-  });
-
   it('should normalize properties from the MouseEvent interface', () => {
     expect(createEvent({which: 2, button: 1}).button).toBe(1);
   });

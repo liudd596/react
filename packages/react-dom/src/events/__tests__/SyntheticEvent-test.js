@@ -30,14 +30,6 @@ describe('SyntheticEvent', () => {
     };
   });
 
-  it('should normalize `target` from the nativeEvent', () => {
-    var target = document.createElement('div');
-    var syntheticEvent = createEvent({srcElement: target});
-
-    expect(syntheticEvent.target).toBe(target);
-    expect(syntheticEvent.type).toBe(undefined);
-  });
-
   it('should be able to `preventDefault`', () => {
     var nativeEvent = {};
     var syntheticEvent = createEvent(nativeEvent);
@@ -80,7 +72,7 @@ describe('SyntheticEvent', () => {
   it('should be nullified if the synthetic event has called destructor and log warnings', () => {
     spyOn(console, 'error');
     var target = document.createElement('div');
-    var syntheticEvent = createEvent({srcElement: target});
+    var syntheticEvent = createEvent({target});
     syntheticEvent.destructor();
     expect(syntheticEvent.type).toBe(null);
     expect(syntheticEvent.nativeEvent).toBe(null);
@@ -100,7 +92,7 @@ describe('SyntheticEvent', () => {
   it('should warn when setting properties of a destructored synthetic event', () => {
     spyOn(console, 'error');
     var target = document.createElement('div');
-    var syntheticEvent = createEvent({srcElement: target});
+    var syntheticEvent = createEvent({target});
     syntheticEvent.destructor();
     expect((syntheticEvent.type = 'MouseEvent')).toBe('MouseEvent');
     expectDev(console.error.calls.count()).toBe(1);
